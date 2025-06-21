@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Access Video Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Access Instructions</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      background-color: #f8f8f8;
       color: #000;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      padding: 20px;
+      margin: 0;
     }
-    .container {
-      background-color: #fff;
-      border: 1px solid #ccc;
+
+    .box {
+      background-color: white;
+      border: 2px solid #E1C16E;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 32px;
-      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 24px;
+      max-width: 500px;
+      width: 100%;
       text-align: center;
     }
-    .heading {
+
+    .box h1 {
+      font-size: 1.8em;
       color: #0E95A7;
-      margin-bottom: 20px;
+      margin-bottom: 0.5em;
     }
-    .instructions {
-      color: #333;
-      font-size: 16px;
-      margin-bottom: 30px;
+
+    .box p {
+      font-size: 1.2em;
+      line-height: 1.6;
     }
-    .button {
-      background-color: #E1C16E;
-      color: #000;
-      font-weight: bold;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 6px;
-      display: inline-block;
-      transition: background-color 0.3s;
-    }
-    .button:hover {
-      background-color: #d4b15f;
+
+    @media (max-width: 480px) {
+      .box h1 {
+        font-size: 1.5em;
+      }
+
+      .box p {
+        font-size: 1.1em;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="heading">Access Video Page</h1>
-    <p class="instructions">
-      Please click the button below to access your video. You may be asked to sign in with your Google account.
+  <div class="box">
+    <h1>You're Almost There!</h1>
+    <p>
+      Please click the button or follow the link to access the video.<br />
+      If the video does not open automatically, return to the homepage and try again.
     </p>
-    <a class="button" href="https://sites.google.com/onyespeaks.com/self-advocacyvideo/Selfadvocacyvideo9" target="_blank">
-      Go to Video Page
-    </a>
   </div>
 </body>
 </html>
+
