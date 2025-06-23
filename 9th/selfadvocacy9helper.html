@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Checking your access. Please wait...</p>
+
+  <script>
+    // Replace with your actual Apps Script URL
+    const appsScriptUrl = "https://script.google.com/macros/s/AKfycbz02GCF24FF1Vd8RdEdUS-ZxcDqQkVXYXvZo8RlZtF4vKKPaAw7g-nrTCIFBAVSfaQeUg/exec?generate=true";
+
+    // Replace with your actual Wix video page
+    const wixPageBase = "https://www.onyespeaks.com/selfadvocacy9";
+
+    fetch(appsScriptUrl)
+      .then(res => res.json())
+      .then(data => {
+        if (data.token) {
+          const redirectUrl = `${wixPageBase}?t=${data.token}`;
+          window.location.replace(redirectUrl);
+        } else {
+          document.body.innerHTML = "<p>❌ Failed to generate access token.</p>";
+        }
+      })
+      .catch(() => {
+        document.body.innerHTML = "<p>⚠️ Error contacting server.</p>";
+      });
+  </script>
+</body>
+</html>
+
