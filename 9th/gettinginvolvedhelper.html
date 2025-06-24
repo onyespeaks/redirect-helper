@@ -2,33 +2,49 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Checking Access...</title>
+  <title>Verifying Access...</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-  <p>🔒 Verifying your access. Please wait...</p>
+  <p>🔐 Verifying your access, please wait...</p>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const shortToken = urlParams.get("s");
-
-    const appsScript = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec";
-    const wixPageBase = "https://www.onyespeaks.com/gettinginvolved";
+    const shortToken = new URLSearchParams(window.location.search).get('s');
+    const appsScriptURL = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec";
+    const wixPageURL = "https://www.onyespeaks.com/gettinginvolved";
 
     if (!shortToken) {
-      document.body.innerHTML = "⚠️ Missing token. Please return to your original access point.";
+      document.body.innerHTML = "<p>❌ Unable to verify access. Please use the official link to access this page.</p>";
     } else {
-      fetch(`${appsScript}?short=${shortToken}`)
+      fetch(`${appsScriptURL}?checkShort=${shortToken}`)
         .then(res => res.json())
         .then(data => {
-          if (data.token) {
-            const fullUrl = `${wixPageBase}?t=${data.token}`;
-            window.location.replace(fullUrl);
+          if (data.valid) {
+            fetch(`${appsScriptURL}?generate=true`)
+              .then(res => res.json())
+              .then(data => {
+                if (data.token) {
+                  window.location.href = `${wixPageURL}?t=${data.token}`;
+                } else {
+                  document.body.innerHTML = "<p>❌ Unable to verify access. Please try again from the original site.</p>";
+                }
+              })
+              .catch(() => {
+                document.body.innerHTML = "<p>⚠️ Unable to verify access. Please try again from the official link.</p>";
+              });
           } else {
-            document.body.innerHTML = "❌ Access denied.";
+            document.body.innerHTML = "<p>🚫 Unable to verify access. Please return to the main access page.</p>";
           }
         })
         .catch(() => {
-          document.body.innerHTML = "⚠️ Unable to verify access. Please try again later.";
+          document.body.innerHTML = "<p>⚠️ There was a problem verifying your access. Please try again later.</p>";
         });
     }
   </script>
