@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Access Video</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 8px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎓 Access the Getting Involved Video</h2>
+  <p>Click the button below to verify access.</p>
+  <button id="accessBtn">Access Video</button>
+  <p id="message" style="margin-top:20px;"></p>
+
+  <script>
+    const button = document.getElementById("accessBtn");
+    const message = document.getElementById("message");
+
+    button.onclick = () => {
+      message.textContent = "Verifying access... please wait.";
+
+      // Replace with your actual Apps Script URL
+      const appsScriptURL = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec";
+
+      // Step 1: Generate a short-lived token
+      fetch(`${appsScriptURL}?generateShort=true`)
+        .then(() => {
+          // Wait a moment for redirect to take place from Apps Script
+          // The Apps Script should handle the redirect to the GitHub helper with `?s=shortToken`
+          message.textContent = "Redirecting...";
+        })
+        .catch(() => {
+          message.textContent = "❌ Unable to verify access. Please try again later.";
+        });
+    };
+  </script>
+</body>
+</html>
