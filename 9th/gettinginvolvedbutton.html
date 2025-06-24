@@ -27,29 +27,13 @@
   <h2>🎓 Access the Getting Involved Video</h2>
   <p>Click the button below to verify access.</p>
   <button id="accessBtn">Access Video</button>
-  <p id="message" style="margin-top:20px;"></p>
 
   <script>
-    const button = document.getElementById("accessBtn");
-    const message = document.getElementById("message");
-
-    button.onclick = () => {
-      message.textContent = "Verifying access... please wait.";
-
-      // Replace with your actual Apps Script URL
-      const appsScriptURL = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec";
-
-      // Step 1: Generate a short-lived token
-      fetch(`${appsScriptURL}?generateShort=true`)
-        .then(() => {
-          // Wait a moment for redirect to take place from Apps Script
-          // The Apps Script should handle the redirect to the GitHub helper with `?s=shortToken`
-          message.textContent = "Redirecting...";
-        })
-        .catch(() => {
-          message.textContent = "❌ Unable to verify access. Please try again later.";
-        });
+    document.getElementById("accessBtn").onclick = () => {
+      const appsScriptURL = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec?generateShort=true";
+      window.location.href = appsScriptURL;
     };
   </script>
 </body>
 </html>
+
