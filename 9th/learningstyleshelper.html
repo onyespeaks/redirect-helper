@@ -21,7 +21,7 @@
           const redirectUrl = `${wixPageBase}?t=${data.token}`;
           window.location.replace(redirectUrl);
         } else {
-          document.body.innerHTML = "<p>❌ Failed to generate access token.</p>";
+          document.body.innerHTML = "<p>❌ Unable to verify access. Please try again from the official link.</p>";
         }
       })
       .catch(() => {
