@@ -9,49 +9,46 @@
       text-align: center;
       padding: 40px;
     }
-    #accessBtn {
-      padding: 14px 28px;
+    button {
+      padding: 12px 24px;
       font-size: 18px;
       cursor: pointer;
       border: none;
       background-color: #007bff;
       color: white;
       border-radius: 8px;
-      user-select: none;
     }
-    #accessBtn:hover {
+    button:hover {
       background-color: #0056b3;
+    }
+    a {
+      text-decoration: none;
     }
   </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
   <h2>🎓 Access the Getting Involved Video</h2>
   <p>Click the button below to verify access.</p>
+
   <button id="accessBtn">Access Video</button>
   <p id="message" style="margin-top:20px;"></p>
 
   <script>
-    const accessBtn = document.getElementById("accessBtn");
+    const button = document.getElementById("accessBtn");
     const message = document.getElementById("message");
 
-    accessBtn.onclick = () => {
-      message.textContent = "Verifying access...";
+    button.onclick = () => {
+      message.textContent = "Verifying access... please wait.";
 
-      const appsScriptURL = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec";
+      // Apps Script URL that generates a 1-day token and redirects
+      const appsScriptURL = "https://script.google.com/macros/s/AKfycbz02GCF24FF1Vd8RdEdUS-ZxcDqQkVXYXvZo8RlZtF4vKKPaAw7g-nrTCIFBAVSfaQeUg/exec?generate=true";
 
-      fetch(`${appsScriptURL}?generate=true`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.token) {
-            // Fast, clean redirect without exposing GitHub URL in browser history
-            window.location.replace(`https://www.onyespeaks.com/gettinginvolved?t=${data.token}`);
-          } else {
-            message.textContent = "❌ Unable to verify access. Please try again later.";
-          }
-        })
-        .catch(() => {
-          message.textContent = "❌ Unable to verify access. Please try again later.";
-        });
+      // Hide the URL from hover/right-click by auto-clicking a hidden link
+      const tempLink = document.createElement("a");
+      tempLink.href = appsScriptURL;
+      tempLink.style.display = "none";
+      document.body.appendChild(tempLink);
+      tempLink.click();
     };
   </script>
 </body>
