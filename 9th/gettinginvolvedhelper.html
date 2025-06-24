@@ -2,53 +2,32 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Verifying Access...</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      margin-top: 40px;
-      padding: 20px;
-    }
-  </style>
+  <title>Redirecting...</title>
 </head>
 <body>
-  <p>🔐 Verifying your access, please wait...</p>
+  <p>Checking your access. Please wait...</p>
 
   <script>
-    const shortToken = new URLSearchParams(window.location.search).get('s');
-    const appsScriptURL = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec";
-    const wixPageURL = "https://www.onyespeaks.com/gettinginvolved";
+    // Replace with your actual Apps Script URL
+    const appsScriptUrl = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec?generate=true";
 
-    if (!shortToken) {
-      document.body.innerHTML = "<p>❌ Unable to verify access. Please use the official link to access this page.</p>";
-    } else {
-      fetch(`${appsScriptURL}?checkShort=${shortToken}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.valid) {
-            fetch(`${appsScriptURL}?generate=true`)
-              .then(res => res.json())
-              .then(data => {
-                if (data.token) {
-                  window.location.href = `${wixPageURL}?t=${data.token}`;
-                } else {
-                  document.body.innerHTML = "<p>❌ Unable to verify access. Please try again from the original site.</p>";
-                }
-              })
-              .catch(() => {
-                document.body.innerHTML = "<p>⚠️ Unable to verify access. Please try again from the official link.</p>";
-              });
-          } else {
-            document.body.innerHTML = "<p>🚫 Unable to verify access. Please return to the main access page.</p>";
-          }
-        })
-        .catch(() => {
-          document.body.innerHTML = "<p>⚠️ There was a problem verifying your access. Please try again later.</p>";
-        });
-    }
+    // Replace with your actual Wix video page
+    const wixPageBase = "https://www.onyespeaks.com/gettinginvolved";
+
+    fetch(appsScriptUrl)
+      .then(res => res.json())
+      .then(data => {
+        if (data.token) {
+          const redirectUrl = `${wixPageBase}?t=${data.token}`;
+          window.location.replace(redirectUrl);
+        } else {
+          document.body.innerHTML = "<p>❌ Failed to generate access token.</p>";
+        }
+      })
+      .catch(() => {
+        document.body.innerHTML = "<p>⚠️ Error contacting server.</p>";
+      });
   </script>
 </body>
 </html>
-
 
