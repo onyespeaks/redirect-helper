@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checking Access</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔒 Verifying Access...</h2>
+  <p>Please wait a moment while we check your access...</p>
+
+  <script>
+    const appsScriptURL = "https://script.google.com/macros/s/AKfycbx9AQnyCeQwOPGFoz--XwrnVgMwyeS7Lo8NRT6X91AXGpRc_6Ye-PVUjy5bafDZ3V0e/exec?generate=true";
+    const wixTargetBase = "https://www.onyespeaks.com/gettinginvolved";
+
+    fetch(appsScriptURL)
+      .then(res => res.json())
+      .then(data => {
+        if (data.token) {
+          const redirectTo = `${wixTargetBase}?t=${data.token}`;
+          window.location.href = redirectTo;
+        } else {
+          document.body.innerHTML = "<p>❌ Access denied. Please access this page from the approved Google Site.</p>";
+        }
+      })
+      .catch(() => {
+        document.body.innerHTML = "<p>⚠️ Unable to verify access. Please try again later.</p>";
+      });
+  </script>
+</body>
+</html>
