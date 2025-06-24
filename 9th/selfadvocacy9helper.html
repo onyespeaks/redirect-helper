@@ -2,32 +2,33 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <title>Checking Access...</title>
 </head>
 <body>
-  <p>Checking your access. Please wait...</p>
+  <p>🔐 Verifying your access. Please wait...</p>
 
   <script>
-    // Replace with your actual Apps Script URL
-    const appsScriptUrl = "https://script.google.com/macros/s/AKfycbz02GCF24FF1Vd8RdEdUS-ZxcDqQkVXYXvZo8RlZtF4vKKPaAw7g-nrTCIFBAVSfaQeUg/exec?generate=true";
+    // Apps Script endpoint WITH secret key
+    const appsScriptURL = "https://script.google.com/macros/s/AKfycbz02GCF24FF1Vd8RdEdUS-ZxcDqQkVXYXvZo8RlZtF4vKKPaAw7g-nrTCIFBAVSfaQeUg/exec?k=abc123";
 
-    // Replace with your actual Wix video page
+    // Destination Wix page
     const wixPageBase = "https://www.onyespeaks.com/selfadvocacy9";
 
-    fetch(appsScriptUrl)
+    fetch(appsScriptURL)
       .then(res => res.json())
       .then(data => {
         if (data.token) {
           const redirectUrl = `${wixPageBase}?t=${data.token}`;
           window.location.replace(redirectUrl);
         } else {
-          document.body.innerHTML = "<p>❌ Failed to generate access token.</p>";
+          document.body.innerHTML = "<p>❌ Token generation failed.</p>";
         }
       })
       .catch(() => {
-        document.body.innerHTML = "<p>⚠️ Error contacting server.</p>";
+        document.body.innerHTML = "<p>⚠️ Error connecting to server.</p>";
       });
   </script>
 </body>
 </html>
+
 
