@@ -8,9 +8,11 @@
       font-family: sans-serif;
       text-align: center;
       padding: 40px;
+      user-select: none;
     }
+
     button {
-      padding: 12px 24px;
+      padding: 14px 28px;
       font-size: 18px;
       cursor: pointer;
       border: none;
@@ -18,41 +20,27 @@
       color: white;
       border-radius: 8px;
     }
+
     button:hover {
       background-color: #0056b3;
     }
-    a {
-      text-decoration: none;
-    }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
   <h2>🎓 Access the Getting Involved Video</h2>
-  <p>Click the button below to verify access.</p>
+  <p>Click the button below to proceed.</p>
 
-  <button id="accessBtn">Access Video</button>
-  <p id="message" style="margin-top:20px;"></p>
+  <button onclick="redirectToHelper()">Access Video</button>
 
   <script>
-    const button = document.getElementById("accessBtn");
-    const message = document.getElementById("message");
-
-    button.onclick = () => {
-      message.textContent = "Verifying access... please wait.";
-
-      // Apps Script URL that generates a 1-day token and redirects
-      const appsScriptURL = "https://script.google.com/macros/s/AKfycbz02GCF24FF1Vd8RdEdUS-ZxcDqQkVXYXvZo8RlZtF4vKKPaAw7g-nrTCIFBAVSfaQeUg/exec?generate=true";
-
-      // Hide the URL from hover/right-click by auto-clicking a hidden link
-      const tempLink = document.createElement("a");
-      tempLink.href = appsScriptURL;
-      tempLink.style.display = "none";
-      document.body.appendChild(tempLink);
-      tempLink.click();
-    };
+    function redirectToHelper() {
+      // Use JavaScript redirect to hide link preview
+      window.location.href = "https://onyespeaks.github.io/redirect-helper/9th/gettinginvolvedhelper.html";
+    }
   </script>
 </body>
 </html>
+
 
 
 
